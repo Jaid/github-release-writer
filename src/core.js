@@ -19,7 +19,11 @@ const core = new JaidCore({
 
 /**
  * @typedef {Object} Config
- * @prop {string} githubToken
+ * @prop {string} githubClientId
+ * @prop {string} githubClientSecret
+ * @prop {string} webhookSecret
+ * @prop {number} githubAppId
+ * @prop {number} webhookPort
  */
 
 /**

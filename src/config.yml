@@ -1,1 +1,4 @@
 apiPayloadLimit: 20mb
+githubAppId: 39410
+webhookPort: 39411
+pemFilePath: /home/jaid/secret.pem
