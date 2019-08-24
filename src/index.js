@@ -5,6 +5,9 @@ const job = async () => {
   const pluginsRequire = require.context("./plugins/", true, /index.js$/)
   for (const value of pluginsRequire.keys()) {
     const {pluginName} = value.match(/[/\\](?<pluginName>.+?)[/\\]index\.js$/).groups
+    if (pluginName.includes("/") || pluginName.includes("\\")) {
+      continue
+    }
     plugins[pluginName] = pluginsRequire(value).default
   }
   await core.init(plugins)

@@ -1,38 +1,25 @@
 import JaidCore from "jaid-core"
 
+import defaults from "./config.yml"
+
 const core = new JaidCore({
   name: _PKG_TITLE,
   version: _PKG_VERSION,
-  gotLogLevel: "info",
-  insecurePort: 21784,
   useGot: true,
+  insecurePort: 39410,
   configSetup: {
+    defaults,
     secretKeys: [
-      "twitterConsumerKey",
-      "twitterConsumerSecret",
-      "apiUser",
+      "githubClientId",
+      "githubClientSecret",
+      "webhookSecret",
     ],
-    defaults: {
-      callbackUrl: "https://twitter.example.com/callback",
-      apiPayloadLimit: "20mb",
-    },
   },
 })
 
 /**
- * @typedef ApiUser
- * @type {Object}
- * @prop {string} user
- * @prop {string} key
- */
-
-/**
  * @typedef {Object} Config
- * @prop {string} twitterConsumerKey
- * @prop {string} twitterConsumerSecret
- * @prop {ApiUser|ApiUser[]} apiUser
- * @prop {string} callbackUrl
- * @prop {string} apiPayloadLimit
+ * @prop {string} githubToken
  */
 
 /**

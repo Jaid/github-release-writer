@@ -1,0 +1,104 @@
+### Changelog
+
+<table>
+<tr>
+<th>Type</th>
+<th>Note</th>
+</tr>
+{{#each changes}}
+<tr>
+<td>
+{{#if feature}}
+:gift: Feature
+{{else if feat}}
+:gift: Feature
+{{else if new}}
+:gift: Feature
+{{else if content}}
+:gift: Feature
+{{else if fix}}
+:wrench: Fix
+{{else if fixed}}
+:wrench: Fix
+{{else if improve}}
+:nail_care: Improvement
+{{else if enhance}}
+:nail_care: Improvement
+{{else if polish}}
+:nail_care: Improvement
+{{else if p}}
+:file_folder: Project Management
+{{else if project}}
+:file_folder: Project Management
+{{else if manage}}
+:file_folder: Project Management
+{{else if boilerplate}}
+:file_folder: Project Management
+{{else if documentation}}
+:scroll: Documentation
+{{else if doc}}
+:scroll: Documentation
+{{else if docs}}
+:scroll: Documentation
+{{else if readme}}
+:scroll: Documentation
+{{else if break}}
+:hammer: Breaking
+{{else if breaking}}
+:hammer: Breaking
+{{else}}
+:black_nib: {{type}}
+{{/if}}
+</td>
+<td>{{note}}</td>
+</tr>
+{{/each}}
+</table>
+
+{{#if hasDependencyChanges}}
+### Dependency changes
+
+<table>
+{{#each dependencySources}}
+{{#if hasChanges}}
+<tr>
+<th colspan=4><h3>{{title}}</h3><hr></td>
+</tr>
+<tr>
+<th>Type</th>
+<th>Package</th>
+<th>Old version</th>
+<th>New version</th>
+</tr>
+{{#each installedPackages}}
+<tr>
+<td>:electric_plug: Added</td>
+<td><a href="https://yarnpkg.com/package/{{package}}"><code>{{package}}</code></a></td>
+<td></td>
+<td><code>{{version}}</code></td>
+</tr>
+{{/each}}
+{{#each removedPackages}}
+<tr>
+  <td>:put_litter_in_its_place: Removed</td>
+<td><a href="https://yarnpkg.com/package/{{package}}"><code>{{package}}</code></a></td>
+<td><code>{{version}}</code></td>
+<td></td>
+</tr>
+{{/each}}
+{{#each updates}}
+<tr>
+<td>:sunflower: Updated</td>
+<td><a href="https://yarnpkg.com/package/{{package}}"><code>{{package}}</code></a></td>
+<td><code>{{oldVersion}}</code></td>
+<td><code>{{newVersion}}</code></td>
+</tr>
+{{/each}}
+{{/if}}
+{{/each}}
+</table>
+{{/if}}
+
+---
+
+Code changes: [{{oldVersion}} … {{newVersion}}]({{compareUrl}})
