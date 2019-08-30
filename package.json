@@ -19,9 +19,11 @@
     "globby": "^10.0.1",
     "got": "^9.6.0",
     "handlebars": "^4.1.2",
+    "handlebars-helper-plural": "^1.0.1",
     "has-content": "^1.1.0",
     "jaid-core": "^4.5.1",
     "json5": "^2.1.0",
+    "key-counter": "^1.0.2",
     "koa-bodyparser": "^4.2.1",
     "lodash": "^4.17.15",
     "oauth-1.0a": "^2.2.6",
@@ -31,7 +33,8 @@
     "query-string": "^6.8.2",
     "semver": "^6.3.0",
     "shortid": "^2.2.14",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "zahl": "^2.0.1"
   },
   "devDependencies": {
     "acorn": "^7.0.0",

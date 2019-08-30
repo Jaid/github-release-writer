@@ -14,7 +14,7 @@ async function getPackageJson(context, fetchOptions) {
   let content
   try {
     const response = await context.github.repos.getContents({
-      fetchOptions,
+      ...fetchOptions,
       path: "package.json",
     })
     content = Buffer.from(response.data.content, response.data.encoding).toString("utf8")

@@ -1,0 +1,57 @@
+- title: Feature
+  emoji: gift
+  prefix:
+    - feat
+    - feature
+    - new
+    - add
+    - added
+    - adding
+    - implement
+    - implemented
+    - implementation
+    - content
+- title: Fix
+  emoji: ambulance
+  prefix:
+    - fix
+    - fixed
+    - repair
+    - repaired
+- title: Improvement
+  emoji: nail_care
+  prefix:
+    - improve
+    - improved
+    - improving
+    - improvement
+    - enhance
+    - enhanced
+    - enhancing
+    - enhancement
+    - polish
+    - polished
+    - polishing
+- title: Project Management
+  emoji: file_folder
+  prefix:
+    - project
+    - manage
+    - meta
+    - boilerplate
+    - refactor
+    - refactored
+    - refactoring
+- title: Documentation
+  emoji: scroll
+  prefix:
+    - documentation
+    - doc
+    - docs
+    - documenting
+    - documented
+- title: Breaking
+  emoji: hammer
+  prefix:
+    - break
+    - breaking
