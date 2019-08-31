@@ -21,7 +21,7 @@
     "handlebars": "^4.1.2",
     "handlebars-helper-plural": "^1.0.1",
     "has-content": "^1.1.0",
-    "jaid-core": "^4.5.1",
+    "jaid-core": "^4.5.2",
     "json5": "^2.1.0",
     "key-counter": "^1.0.2",
     "koa-bodyparser": "^4.2.1",
