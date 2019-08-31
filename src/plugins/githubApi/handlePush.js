@@ -37,8 +37,12 @@ async function getPackageJson(context, fetchOptions) {
  */
 async function handlePush(context) {
   const {payload} = context
+  if (payload.sender.id === 54471281) {
+    // That's nodejs-changelog-writer[bot]
+    return
+  }
   if (payload.ref !== "refs/heads/master") {
-    logger.debug("Ref is not \"refs/heads/master\", skipping")
+    logger.debug("Ref is \"%s\" and not \"refs/heads/master\", skipping", payload.ref)
     return
   }
   if (!payload.before) {
@@ -49,7 +53,9 @@ async function handlePush(context) {
   const modifiedFiles = new Set
   for (const commit of commits) {
     if (hasContent(commit?.modified)) {
-      Set.prototype.add.apply(modifiedFiles, commit.modified)
+      for (const modifiedFile of commit.modified) {
+        modifiedFiles.add(modifiedFile)
+      }
     }
   }
   if (!modifiedFiles.has("package.json")) {
@@ -125,6 +131,7 @@ async function handlePush(context) {
     head: payload.after,
   })
   const projectName = afterPkg.title || afterPkg.name || repoName
+  const packageName = afterPkg.name || repoName
   const markdownChangelog = generateChangelog({
     payload,
     projectName,
@@ -133,6 +140,8 @@ async function handlePush(context) {
     ownerName,
     repoName,
     afterTagName,
+    packageName,
+    pkg: afterPkg,
   })
   await context.github.repos.createRelease({
     body: markdownChangelog,

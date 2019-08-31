@@ -1,5 +1,5 @@
-import KeyCounter from "key-counter"
 import ensureArray from "ensure-array"
+import camelCase from "camel-case"
 
 import template from "./markdown.hbs"
 import commitTypes from "./commitTypes.yml"
@@ -36,10 +36,23 @@ function getCommitTypeByPrefix(prefix) {
  * @return {string}
  */
 export default options => {
-  const authorCounter = new KeyCounter
+  const authors = {}
   const commitCategories = {}
-  for (const {author, commit} of options.comparison.commits) {
-    authorCounter.feed(String(author.id))
+  for (const {author, commit, sha} of options.comparison.commits) {
+    commit.sha = sha
+    commit.shortSha = sha.substring(0, 6)
+    const authorId = String(author.id)
+    if (!authors.hasOwnProperty(authorId)) {
+      authors[authorId].commits++
+    } else {
+      authors[authorId] = {
+        // id
+        // profile pic url
+        // login
+        commits: 1,
+      }
+    }
+    commit.authorData = authors[authorId]
     const regex = / *(?<prefix>\w+) *: *(?<message>.+)/s
     const parsed = regex.exec(commit.message)
     if (parsed) {
@@ -49,21 +62,23 @@ export default options => {
       commit.prefix = prefix.toLowerCase()
       if (commitType) {
         commit.message = parsed.groups.message
-        if (!commitCategories.hasOwnProperty(commitType.title)) {
-          commitCategories[commitType.title] = {
+        const commitTypeId = camelCase(commitType.title)
+        if (!commitCategories.hasOwnProperty(commitTypeId)) {
+          commitCategories[commitTypeId] = {
             commits: [],
             title: commitType.title,
             emoji: commitType.emoji,
           }
         }
-        commitCategories[commitType.title].commits.push(commit)
+        commitCategories[commitTypeId].commits.push(commit)
       }
       commit.message = /.*/.exec(commit.message)[0].trim()
     }
   }
-  return template({
+  const templateContext = {
     commitCategories,
     ...options,
     authorCounts: authorCounter.toObjectSortedByValues(),
-  })
+  }
+  return template(templateContext)
 }
