@@ -1,4 +1,9 @@
-### :hammer: abc
+{{#each commitCategories}}
+#### :{{this.emoji}}: {{this.title}}
+{{#each commits}}
+- {{message}}
+{{/each}}
+{{/each}}
 
 ---
 

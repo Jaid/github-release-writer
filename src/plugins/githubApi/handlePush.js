@@ -142,7 +142,6 @@ async function handlePush(context) {
     tag_name: afterTagName,
     target_commitish: payload.after,
   })
-  debugger
 }
 
 export default handlePush
