@@ -1,13 +1,16 @@
 {{#each commitCategories}}
-### :{{this.emoji}}: {{this.title}}
+### :{{emoji}}: {{title}}
 {{#each commits}}
 > [`{{shortSha}}`](https://github.com/{{@root.ownerName}}/{{@root.repoName}}/commit/{{sha}}) {{message}}
 {{/each}}
 {{/each}}
 
+
 ---
-- Code changes: [{{beforeTag.name}} …
-{{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1)
-({{$handlebars-helper-plural comparison.total_commits 'commit'}})
+- Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) ({{$handlebars-helper-plural comparison.total_commits 'commit'}})
 - jsDelivr: [cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}})
 - UNPKG: [unpkg.com/browse/{{packageName}}@{{pkg.version}}](https://unpkg.com/browse/{{packageName}}@{{pkg.version}}/)
+
+#### {{$handlebars-helper-plural authorsCount 'author'}}
+
+{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}"/></a> {{/each}}

@@ -1,5 +1,6 @@
 import ensureArray from "ensure-array"
 import camelCase from "camel-case"
+import {sortBy} from "lodash"
 
 import template from "./markdown.hbs"
 import commitTypes from "./commitTypes.yml"
@@ -10,6 +11,22 @@ import commitTypes from "./commitTypes.yml"
  * @prop {string} title
  * @prop {string} emoji
  */
+
+function sortCategories({id}) {
+  const index = [
+    "breaking",
+    "feature",
+    "fix",
+    "improvement",
+    "documentation",
+    "project management",
+  ].indexOf(id)
+  if (index === -1) {
+    return Number.MAX_SAFE_INTEGER
+  } else {
+    return index
+  }
+}
 
 /**
  * @param {string} prefix
@@ -42,13 +59,14 @@ export default options => {
     commit.sha = sha
     commit.shortSha = sha.substring(0, 6)
     const authorId = String(author.id)
-    if (!authors.hasOwnProperty(authorId)) {
+    if (authors.hasOwnProperty(authorId)) {
       authors[authorId].commits++
     } else {
       authors[authorId] = {
-        // id
-        // profile pic url
-        // login
+        avatar: author.avatar_url,
+        gravatarId: author.gravatar_id,
+        url: author.html_url,
+        name: author.login,
         commits: 1,
       }
     }
@@ -66,6 +84,7 @@ export default options => {
         if (!commitCategories.hasOwnProperty(commitTypeId)) {
           commitCategories[commitTypeId] = {
             commits: [],
+            id: commitTypeId,
             title: commitType.title,
             emoji: commitType.emoji,
           }
@@ -76,9 +95,10 @@ export default options => {
     }
   }
   const templateContext = {
-    commitCategories,
+    authors: sortBy(Object.values(authors), "commits"),
+    authorsCount: Object.entries(authors).length,
+    commitCategories: sortBy(Object.values(commitCategories), sortCategories),
     ...options,
-    authorCounts: authorCounter.toObjectSortedByValues(),
   }
   return template(templateContext)
 }
