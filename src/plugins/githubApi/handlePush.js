@@ -73,9 +73,9 @@ async function handlePush(context) {
     })
   })
   const fetchPkgResponse = await Promise.all(fetchPkgJobs)
-  let beforePkg = fetchPkgResponse[0]
+  const beforePushPkg = fetchPkgResponse[0]
   const afterPkg = fetchPkgResponse[1]
-  const beforeVersion = semver.valid(beforePkg?.version)
+  const beforeVersion = semver.valid(beforePushPkg?.version)
   if (beforeVersion === null) {
     logger.debug("Semver in before-version package.json is invalid")
     return
@@ -98,6 +98,7 @@ async function handlePush(context) {
   const beforeTagName = `v${beforeVersion}`
   const afterTagName = `v${afterVersion}`
   let beforeTag
+  let lastTagPkg
   try {
     const tagResponse = await context.github.repos.getCommit({
       owner: ownerName,
@@ -106,6 +107,11 @@ async function handlePush(context) {
     })
     beforeTag = tagResponse.data
     beforeTag.name = beforeTagName
+    lastTagPkg = await getPackageJson(context, {
+      ref: beforeTagName,
+      owner: ownerName,
+      repo: repoName,
+    })
   } catch {}
   if (!beforeTag) {
     const tagsList = await context.github.repos.listTags({
@@ -118,10 +124,10 @@ async function handlePush(context) {
       logger.warn("No relevant tag found, stopping process")
       return
     }
-    beforePkg = await getPackageJson(context, {
+    lastTagPkg = await getPackageJson(context, {
+      ref: beforeTag.name,
       owner: ownerName,
       repo: repoName,
-      ref: beforeTag.name,
     })
     logger.warn("Release for tag %s not found, using latest tag %s instead", beforeTagName, beforeTag.name)
   }
@@ -142,8 +148,9 @@ async function handlePush(context) {
     repoName,
     afterTagName,
     packageName,
+    lastTagPkg,
     pkg: afterPkg,
-    dependencyChanges: compareDependencies(hasContent(beforePkg) ? beforePkg : {}, afterPkg),
+    dependencyChanges: compareDependencies(hasContent(lastTagPkg) ? lastTagPkg : {}, afterPkg),
   })
   await context.github.repos.createRelease({
     body: markdownChangelog,

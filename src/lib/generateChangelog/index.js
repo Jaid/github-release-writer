@@ -2,8 +2,9 @@ import ensureArray from "ensure-array"
 import camelCase from "camel-case"
 import {sortBy} from "lodash"
 import hasContent from "has-content"
-
+import {logger} from "src/core"
 import humanizeList from "humanize-list"
+
 import template from "./markdown.hbs"
 import commitTypes from "./commitTypes.yml"
 import dependencyTypes from "./dependencyTypes"
@@ -105,6 +106,7 @@ export default options => {
     if (!hasChanges) {
       continue
     }
+    logger.debug("Found changes for \"%s\"", title)
     dependencies[dependencyType] = {title}
     for (const [eventType, eventList] of Object.entries(events)) {
       if (hasContent(eventList)) {
