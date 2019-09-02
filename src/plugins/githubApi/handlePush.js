@@ -4,6 +4,7 @@ import semver from "semver"
 import hasContent from "has-content"
 import {capitalize} from "lodash"
 import generateChangelog from "lib/generateChangelog"
+import compareDependencies from "compare-dependencies"
 
 /**
  * @param {import("probot").Context} context
@@ -142,6 +143,7 @@ async function handlePush(context) {
     afterTagName,
     packageName,
     pkg: afterPkg,
+    dependencyChanges: compareDependencies(hasContent(beforePkg) ? beforePkg : {}, afterPkg),
   })
   await context.github.repos.createRelease({
     body: markdownChangelog,

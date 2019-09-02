@@ -5,6 +5,36 @@
 {{/each}}
 {{/each}}
 
+{{#if hasDependencyChanges}}
+
+---
+{{#each dependencies}}
+### {{title}}
+Event|Package|Before|After
+---|---|---|---
+{{#each added}}
+:floppy_disk: Added|[`{{name}}`](https://yarnpkg.com/package/{{name}})||{{range}}
+{{/each}}
+{{#each removed}}
+:toilet: Removed|[`{{name}}`](https://yarnpkg.com/package/{{name}})|{{range}}
+{{/each}}
+{{#each moved}}
+:school_satchel: Moved|[`{{name}}`](https://yarnpkg.com/package/{{name}})|{{oldTypesString}}|{{newType}}
+{{/each}}
+{{#each locked}}
+:lock: Locked|[`{{name}}`](https://yarnpkg.com/package/{{name}})|`{{oldRange}}`|`{{newRange}}`
+{{/each}}
+{{#each unlocked}}
+:unlock: Unlocked|[`{{name}}`](https://yarnpkg.com/package/{{name}})|`{{oldRange}}`|`{{newRange}}`
+{{/each}}
+{{#each downgraded}}
+:fallen_leaf: Downgraded|[`{{name}}`](https://yarnpkg.com/package/{{name}})|`{{oldRange}}`|`{{newRange}}`
+{{/each}}
+{{#each upgraded}}
+:sunflower: Upgraded|[`{{name}}`](https://yarnpkg.com/package/{{name}})|`{{oldRange}}`|`{{newRange}}`
+{{/each}}
+{{/each}}
+{{/if}}
 
 ---
 - Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) ({{$handlebars-helper-plural comparison.total_commits 'commit'}})

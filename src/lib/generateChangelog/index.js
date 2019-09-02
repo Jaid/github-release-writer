@@ -1,9 +1,12 @@
 import ensureArray from "ensure-array"
 import camelCase from "camel-case"
 import {sortBy} from "lodash"
+import hasContent from "has-content"
 
+import humanizeList from "humanize-list"
 import template from "./markdown.hbs"
 import commitTypes from "./commitTypes.yml"
+import dependencyTypes from "./dependencyTypes"
 
 /**
  * @typedef {Object} CommitType
@@ -46,6 +49,7 @@ function getCommitTypeByPrefix(prefix) {
  * @prop {string} projectName
  * @prop {Object} beforePkg
  * @prop {Object} afterPkg
+ * @prop {import("compare-dependencies").Changes} dependencyChanges
  */
 
 /**
@@ -94,11 +98,35 @@ export default options => {
       commit.message = /.*/.exec(commit.message)[0].trim()
     }
   }
+  const dependencies = {}
+  for (const [dependencyType, {title}] of Object.entries(dependencyTypes)) {
+    const events = options.dependencyChanges[dependencyType]
+    const hasChanges = Object.values(events).some(hasContent)
+    if (!hasChanges) {
+      continue
+    }
+    dependencies[dependencyType] = {title}
+    for (const [eventType, eventList] of Object.entries(events)) {
+      if (hasContent(eventList)) {
+        if (eventType === "moved") {
+          dependencies[dependencyType][eventType] = eventList.map(entry => ({
+            ...entry,
+            oldTypesString: humanizeList(entry.oldTypes),
+          }))
+        } else {
+          dependencies[dependencyType][eventType] = eventList
+        }
+      }
+    }
+  }
+  const hasDependencyChanges = Object.values(dependencies).some(hasContent)
   const templateContext = {
+    ...options,
+    dependencies,
+    hasDependencyChanges,
     authors: sortBy(Object.values(authors), "commits"),
     authorsCount: Object.entries(authors).length,
     commitCategories: sortBy(Object.values(commitCategories), sortCategories),
-    ...options,
   }
   return template(templateContext)
 }
