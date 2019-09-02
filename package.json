@@ -30,7 +30,7 @@
     "oauth-1.0a": "^2.2.6",
     "pify": "^4.0.1",
     "prevent-start": "^1.0.3",
-    "probot": "^9.3.2",
+    "probot": "^9.3.3",
     "query-string": "^6.8.3",
     "semver": "^6.3.0",
     "shortid": "^2.2.14",
@@ -44,12 +44,12 @@
     "browserslist-config-jaid-node": "^2.2.2",
     "delay": "^4.3.0",
     "eslint": "^6.3.0",
-    "eslint-config-jaid": "^1.28.2",
+    "eslint-config-jaid": "^1.28.3",
     "jest": "^24.9.0",
     "koa": "^2.8.1",
     "rimraf": "^3.0.0",
     "webpack": "^4.39.3",
-    "webpack-config-jaid": "^5.27.3"
+    "webpack-config-jaid": "^5.27.4"
   },
   "scripts": {
     "clean": "rimraf dist/",
