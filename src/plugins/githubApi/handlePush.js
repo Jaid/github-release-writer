@@ -145,6 +145,10 @@ async function handlePush(context) {
   }
   const projectName = afterPkg.title || afterPkg.name || repoName
   const packageName = afterPkg.name || repoName
+  let isOnNpm = false
+  if (afterPkg.webpackConfigJaid && afterPkg.webpackConfigJaid !== "webapp") {
+    isOnNpm = true
+  }
   const markdownChangelog = generateChangelog({
     payload,
     projectName,
@@ -156,6 +160,7 @@ async function handlePush(context) {
     packageName,
     lastTagPkg,
     isInitialRelease,
+    isOnNpm,
     pkg: afterPkg,
     dependencyChanges: isInitialRelease ? null : compareDependencies(lastTagPkg, afterPkg),
   })
