@@ -1,3 +1,6 @@
+{{#if isInitialRelease}}
+#### :hatching_chick: Initial release
+{{else}}
 {{#each commitCategories}}
 ### :{{emoji}}: {{title}}
 {{#each commits}}
@@ -35,9 +38,12 @@ Event|Package|Before|After
 {{/each}}
 {{/each}}
 {{/if}}
+{{/if}}
 
 ---
+{{#unless isInitialRelease}}
 - Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) ({{$handlebars-helper-plural comparison.total_commits 'commit'}})
+{{/unless}}
 - jsDelivr: [cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}})
 - UNPKG: [unpkg.com/browse/{{packageName}}@{{pkg.version}}](https://unpkg.com/browse/{{packageName}}@{{pkg.version}}/)
 

@@ -102,6 +102,9 @@ export default options => {
   const dependencies = {}
   for (const [dependencyType, {title}] of Object.entries(dependencyTypes)) {
     const events = options.dependencyChanges[dependencyType]
+    if (!events) {
+      continue
+    }
     const hasChanges = Object.values(events).some(hasContent)
     if (!hasChanges) {
       continue

@@ -46,7 +46,7 @@ async function handlePush(context) {
     logger.debug("Ref is \"%s\" and not \"refs/heads/master\", skipping", payload.ref)
     return
   }
-  if (!payload.before) {
+  if (!payload.before || payload.before === "0000000000000000000000000000000000000000") {
     logger.debug("payload.before is %s", payload.before)
     return
   }
@@ -77,7 +77,7 @@ async function handlePush(context) {
   const afterPkg = fetchPkgResponse[1]
   const beforeVersion = semver.valid(beforePushPkg?.version)
   if (beforeVersion === null) {
-    logger.debug("Semver in before-version package.json is invalid")
+    logger.debug("Semver in before-version package.json is %s", beforePushPkg?.version)
     return
   }
   const afterVersion = semver.valid(afterPkg?.version)
@@ -99,6 +99,7 @@ async function handlePush(context) {
   const afterTagName = `v${afterVersion}`
   let beforeTag
   let lastTagPkg
+  let isInitialRelease = false
   try {
     const tagResponse = await context.github.repos.getCommit({
       owner: ownerName,
@@ -120,23 +121,28 @@ async function handlePush(context) {
       repo: repoName,
     })
     beforeTag = tagsList.data[0]
-    if (!beforeTag) {
-      logger.warn("No relevant tag found, stopping process")
-      return
+    if (beforeTag) {
+      lastTagPkg = await getPackageJson(context, {
+        ref: beforeTag.name,
+        owner: ownerName,
+        repo: repoName,
+      })
+      logger.warn("Release for tag %s not found, using latest tag %s instead", beforeTagName, beforeTag.name)
+    } else {
+      isInitialRelease = true
+      logger.debug("No relevant tag found, assuming initial release")
     }
-    lastTagPkg = await getPackageJson(context, {
-      ref: beforeTag.name,
+  }
+  let comparison = null
+  if (!isInitialRelease) {
+    const compareResult = await context.github.repos.compareCommits({
       owner: ownerName,
       repo: repoName,
+      base: beforeTag.name,
+      head: payload.after,
     })
-    logger.warn("Release for tag %s not found, using latest tag %s instead", beforeTagName, beforeTag.name)
+    comparison = compareResult.data
   }
-  const {data: comparison} = await context.github.repos.compareCommits({
-    owner: ownerName,
-    repo: repoName,
-    base: beforeTag.name,
-    head: payload.after,
-  })
   const projectName = afterPkg.title || afterPkg.name || repoName
   const packageName = afterPkg.name || repoName
   const markdownChangelog = generateChangelog({
@@ -149,8 +155,9 @@ async function handlePush(context) {
     afterTagName,
     packageName,
     lastTagPkg,
+    isInitialRelease,
     pkg: afterPkg,
-    dependencyChanges: compareDependencies(hasContent(lastTagPkg) ? lastTagPkg : {}, afterPkg),
+    dependencyChanges: isInitialRelease ? null : compareDependencies(lastTagPkg, afterPkg),
   })
   await context.github.repos.createRelease({
     body: markdownChangelog,
