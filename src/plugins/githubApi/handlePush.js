@@ -159,9 +159,10 @@ async function handlePush(context) {
     pkg: afterPkg,
     dependencyChanges: isInitialRelease ? null : compareDependencies(lastTagPkg, afterPkg),
   })
+  const releaseWeight = isInitialRelease ? "Initial" : capitalize(bumpWeight)
   await context.github.repos.createRelease({
     body: markdownChangelog,
-    name: `[${capitalize(bumpWeight)}] ${projectName} ${afterVersion}`,
+    name: `[${releaseWeight}] ${projectName} ${afterVersion}`,
     owner: ownerName,
     repo: repoName,
     tag_name: afterTagName,

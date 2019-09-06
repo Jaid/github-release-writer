@@ -47,6 +47,8 @@ Event|Package|Before|After
 - jsDelivr: [cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}})
 - UNPKG: [unpkg.com/browse/{{packageName}}@{{pkg.version}}](https://unpkg.com/browse/{{packageName}}@{{pkg.version}}/)
 
+{{#unless isInitialRelease}}
 #### {{$handlebars-helper-plural authorsCount 'author'}}
 
 {{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}"/></a> {{/each}}
+{{/unless}}
