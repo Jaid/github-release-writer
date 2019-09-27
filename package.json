@@ -20,7 +20,7 @@
     "flatted": "^2.0.1",
     "globby": "^10.0.1",
     "got": "^9.6.0",
-    "handlebars": "^4.3.1",
+    "handlebars": "^4.3.3",
     "handlebars-helper-plural": "^1.0.1",
     "handlebars-helpers": "^0.10.0",
     "has-content": "^1.1.0",
