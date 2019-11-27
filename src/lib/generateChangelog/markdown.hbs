@@ -52,5 +52,5 @@ Event|Package|Before|After
 {{#unless isInitialRelease}}
 #### {{$handlebars-helper-plural authorsCount 'author'}}
 
-{{#each authors}}{{#if commits}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}"/></a> {{/if}}{{/each}}
+{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}"/></a> {{/each}}
 {{/unless}}
