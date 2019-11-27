@@ -58,7 +58,7 @@ function getCommitTypeByPrefix(prefix) {
  * @return {string}
  */
 export default options => {
-  const authors = { }
+  const authors = {}
   const commitCategories = {}
   const dependencies = {}
   if (!options.isInitialRelease) {
@@ -79,7 +79,7 @@ export default options => {
         authors.other = {
           avatar: "https://avatars3.githubusercontent.com/in/15368",
           name: "unspecified authors",
-          commits: 0,
+          commits: 1,
           url: "https://github.com",
         }
       }
