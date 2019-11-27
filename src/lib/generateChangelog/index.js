@@ -58,14 +58,7 @@ function getCommitTypeByPrefix(prefix) {
  * @return {string}
  */
 export default options => {
-  const authors = {
-    other: {
-      avatar: "https://avatars3.githubusercontent.com/in/15368",
-      name: "unspecified authors",
-      commits: 0,
-      url: "https://github.com",
-    },
-  }
+  const authors = { }
   const commitCategories = {}
   const dependencies = {}
   if (!options.isInitialRelease) {
@@ -75,13 +68,19 @@ export default options => {
       const authorId = author ? String(author.id) : "other"
       if (authors.hasOwnProperty(authorId)) {
         authors[authorId].commits++
-      } else {
+      } else if (author) {
         authors[authorId] = {
           avatar: author.avatar_url,
-          gravatarId: author.gravatar_id,
           url: author.html_url,
           name: author.login,
           commits: 1,
+        }
+      } else {
+        authors.other = {
+          avatar: "https://avatars3.githubusercontent.com/in/15368",
+          name: "unspecified authors",
+          commits: 0,
+          url: "https://github.com",
         }
       }
       commit.authorData = authors[authorId]
