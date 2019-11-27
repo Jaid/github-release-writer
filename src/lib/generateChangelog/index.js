@@ -63,6 +63,7 @@ export default options => {
       avatar: "https://avatars3.githubusercontent.com/in/15368",
       name: "unspecified authors",
       commits: 0,
+      url: "https://github.com",
     },
   }
   const commitCategories = {}
