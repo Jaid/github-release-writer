@@ -58,14 +58,20 @@ function getCommitTypeByPrefix(prefix) {
  * @return {string}
  */
 export default options => {
-  const authors = {}
+  const authors = {
+    other: {
+      avatar: "https://avatars3.githubusercontent.com/in/15368",
+      name: "unspecified authors",
+      commits: 0,
+    },
+  }
   const commitCategories = {}
   const dependencies = {}
   if (!options.isInitialRelease) {
     for (const {author, commit, sha} of options.comparison.commits) {
       commit.sha = sha
-      commit.shortSha = sha.substring(0, 6)
-      const authorId = String(author.id)
+      commit.shortSha = sha.slice(0, 6)
+      const authorId = author ? String(author.id) : "other"
       if (authors.hasOwnProperty(authorId)) {
         authors[authorId].commits++
       } else {
