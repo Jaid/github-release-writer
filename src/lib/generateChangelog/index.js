@@ -137,7 +137,7 @@ export default options => {
     ...options,
     dependencies,
     hasDependencyChanges,
-    authors: sortBy(Object.values(authors), "commits"),
+    authors: sortBy(Object.values(authors), author => -author.commits),
     authorsCount: Object.entries(authors).length,
     commitCategories: sortBy(Object.values(commitCategories), sortCategories),
   }
