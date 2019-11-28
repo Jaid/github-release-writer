@@ -16,6 +16,8 @@ jobs:
           node-version: "12.13.1"
       - name: npm install
         uses: jaid/action-npm-install@master
+      - name: build:prod
+        run: npm run build:prod
       - name: Jest
         uses: jaid/action-jest@master
       - name: Uptodater
