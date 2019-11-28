@@ -22,6 +22,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Jest
         uses: jaid/action-jest@master
+        with:
+          npmPrepareScript: build:prod
       - name: Uptodater
         uses: jaid/action-uptodater@master
         with:
