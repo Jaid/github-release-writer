@@ -16,14 +16,10 @@ jobs:
           node-version: "12.13.1"
       - name: npm install
         uses: jaid/action-npm-install@master
-      - name: build:prod
-        run: npm run build:prod
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Jest
         uses: jaid/action-jest@master
         with:
-          npmPrepareScript: build:prod
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Uptodater
         uses: jaid/action-uptodater@master
         with:
