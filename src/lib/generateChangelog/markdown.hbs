@@ -16,10 +16,10 @@
 Event|Package|Before|After
 ---|---|---|---
 {{#each added}}
-:floppy_disk: Added|[`{{name}}`](https://yarnpkg.com/package/{{name}})||{{range}}
+:floppy_disk: Added|[`{{name}}`](https://yarnpkg.com/package/{{name}})||`{{range}}`
 {{/each}}
 {{#each removed}}
-:toilet: Removed|[`{{name}}`](https://yarnpkg.com/package/{{name}})|{{range}}
+:toilet: Removed|[`{{name}}`](https://yarnpkg.com/package/{{name}})|`{{range}}`
 {{/each}}
 {{#each moved}}
 :school_satchel: Moved|[`{{name}}`](https://yarnpkg.com/package/{{name}})|{{oldTypesString}}|{{newType}}
