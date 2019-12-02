@@ -66,5 +66,6 @@
     "test:debug": "npm run start",
     "prepareActionJest": "npm run build:prod"
   },
-  "name": "github-release-writer"
+  "name": "github-release-writer",
+  "description": "Generates and inserts changelogs into GitHub releases for Node packages."
 }
