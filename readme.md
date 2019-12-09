@@ -4,31 +4,16 @@
 Generates and inserts changelogs into GitHub releases for Node packages.
 
 ## Installation
-<a href='https://npmjs.com/package/github-release-writer'><img alt='npm logo' src='https://raw.githubusercontent.com/npm/logos/master/npm%20logo/npm-logo-red.png' height=16/></a>
+<a href='https://npmjs.com/package/github-release-writer'><img alt='npm logo' src='https://github.com/Jaid/action-readme/raw/master/images/base-assets/npm.png'/></a>
 ```bash
-npm install --global github-release-writer@^
+npm install --global github-release-writer@^2.2.0
 ```
-<a href='https://yarnpkg.com/package/github-release-writer'><img alt='Yarn logo' src='https://raw.githubusercontent.com/yarnpkg/assets/master/yarn-kitten-full.png' height=24/></a>
+<a href='https://yarnpkg.com/package/github-release-writer'><img alt='Yarn logo' src='https://github.com/Jaid/action-readme/raw/master/images/base-assets/yarn.png'/></a>
 ```bash
-yarn global add github-release-writer@^
+yarn global add github-release-writer@^2.2.0
 ```
 
 
-## Try it out
-Open a browser's JavaScript console and execute:
-
-```javascript
-const scriptElement = document.createElement("script");
-scriptElement.setAttribute("type","text/javascript");
-scriptElement.setAttribute("src","https://unpkg.com/github-release-writer@2.2.0");
-document.querySelector("head").appendChild(scriptElement);
-```
-
-The module is now loaded in a variable.
-
-```javascript
-typeof github-release-writer.default
-```
 
 
 ## License
