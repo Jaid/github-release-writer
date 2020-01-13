@@ -67,5 +67,6 @@
     "prepareActionJest": "npm run build:prod"
   },
   "name": "github-release-writer",
-  "description": "Generates and inserts changelogs into GitHub releases for Node packages."
+  "description": "Generates and inserts changelogs into GitHub releases for Node packages.",
+  "funding": "https://github.com/sponsors/jaid"
 }
