@@ -68,5 +68,9 @@
   },
   "name": "github-release-writer",
   "description": "Generates and inserts changelogs into GitHub releases for Node packages.",
-  "funding": "https://github.com/sponsors/jaid"
+  "funding": "https://github.com/sponsors/jaid",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaid/github-release-writer"
+  }
 }
