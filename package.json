@@ -74,5 +74,18 @@
     "url": "https://github.com/jaid/github-release-writer"
   },
   "homepage": "https://github.com/apps/nodejs-changelog-writer",
-  "keywords": []
+  "keywords": [
+    "automation",
+    "backend",
+    "bot",
+    "changelog",
+    "changelogs",
+    "cli",
+    "github",
+    "github-api",
+    "github-bot",
+    "probot",
+    "release",
+    "server"
+  ]
 }
