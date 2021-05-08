@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dist/dockerVolume/config:/home/app/.config/Github Release Writer
