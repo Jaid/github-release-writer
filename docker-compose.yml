@@ -6,4 +6,5 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./dist/dockerVolume/config:/home/app/.config/Github Release Writer
+      - ./dist/dockerVolume/config:/home/app/.config/github-release-writer
+      - ./dist/dockerVolume/app:/opt/app

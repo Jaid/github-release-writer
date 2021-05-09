@@ -5,5 +5,5 @@ RUN chown -R app /opt/app
 USER app
 ENV NODE_ENV=production
 RUN npm install
-RUN npx webpack
-CMD [ "node", "dist/package/production/index.js" ]
+ENTRYPOINT ["/bin/bash", "-c", "npx webpack && node dist/package/production/index.js"]
+VOLUME /opt/app /home/app/.config/github-release-writer
