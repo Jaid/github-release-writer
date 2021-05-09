@@ -1,0 +1,10 @@
+/Dockerfile
+/docker-compose.yml
+/.dockerignore
+
+/dist
+node_modules
+npm-debug.log
+/.github
+/readme
+readme.md
