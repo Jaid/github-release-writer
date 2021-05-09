@@ -2,7 +2,9 @@
 FROM jaidchen/node-app
 ENV NODE_ENV=production
 COPY . .
-RUN chown --recursive app /opt/app && mkdir --parents /home/app/.config/github-release-writer && chown --recursive app /home/app/.config/github-release-writer
+RUN chown --recursive app /opt/app
+RUN mkdir --parents /home/app/.config/github-release-writer
+RUN chown --recursive app /home/app/.config/github-release-writer
 USER app
 RUN NODE_ENV=development npm install
 RUN node_modules/.bin/webpack
