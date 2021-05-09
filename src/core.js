@@ -3,7 +3,7 @@ import JaidCore from "jaid-core"
 import defaults from "./config.yml"
 
 const core = new JaidCore({
-  name: _PKG_TITLE,
+  name: _PKG_NAME,
   version: _PKG_VERSION,
   useGot: true,
   insecurePort: 39410,
