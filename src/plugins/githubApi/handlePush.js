@@ -1,10 +1,12 @@
-import {logger} from "src/core"
-import json5 from "json5"
-import semver from "semver"
-import hasContent from "has-content"
-import {capitalize} from "lodash"
-import generateChangelog from "lib/generateChangelog"
 import compareDependencies from "compare-dependencies"
+import hasContent from "has-content"
+import json5 from "json5"
+import {capitalize} from "lodash"
+import semver from "semver"
+
+import generateChangelog from "lib/generateChangelog"
+
+import {logger} from "src/core"
 
 /**
  * @param {import("probot").Context} context

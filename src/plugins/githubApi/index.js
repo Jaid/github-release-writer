@@ -1,6 +1,7 @@
-import {config, logger} from "src/core"
-import {createProbot} from "probot"
 import fsp from "@absolunet/fsp"
+import {createProbot} from "probot"
+
+import {config, logger} from "src/core"
 
 import handlePush from "./handlePush"
 

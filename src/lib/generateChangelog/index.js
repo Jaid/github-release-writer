@@ -1,13 +1,14 @@
-import ensureArray from "ensure-array"
 import camelCase from "camel-case"
-import {sortBy} from "lodash"
+import ensureArray from "ensure-array"
 import hasContent from "has-content"
-import {logger} from "src/core"
 import humanizeList from "humanize-list"
+import {sortBy} from "lodash"
 
-import template from "./markdown.hbs"
+import {logger} from "src/core"
+
 import commitTypes from "./commitTypes.yml"
 import dependencyTypes from "./dependencyTypes"
+import template from "./markdown.hbs"
 
 /**
  * @typedef {Object} CommitType
