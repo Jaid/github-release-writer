@@ -45,8 +45,8 @@ async function handlePush(context) {
     logger.debug("Skipping, it's from nodejs-changelog-writer[bot]")
     return
   }
-  if (payload.ref !== "refs/heads/master") {
-    logger.debug("Ref is \"%s\" and not \"refs/heads/master\", skipping", payload.ref)
+  if (payload.ref !== "refs/heads/master" && payload.ref !== "refs/heads/main") {
+    logger.debug("Ref is “%s” and not “refs/heads/master” or “refs/heads/main”, skipping", payload.ref)
     return
   }
   if (!payload.before || payload.before === "0000000000000000000000000000000000000000") {
