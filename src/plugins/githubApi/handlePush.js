@@ -16,7 +16,7 @@ import {logger} from "src/core"
 async function getPackageJson(context, fetchOptions) {
   let content
   try {
-    const response = await context.octokit.repos.getContents({
+    const response = await context.octokit.repos.getContent({
       ...fetchOptions,
       path: "package.json",
     })
