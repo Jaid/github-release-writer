@@ -5,6 +5,7 @@ services:
     build:
       context: .
     ports:
-      - 3000:3000
+      - 39410:39410
+      - 39411:39411
     volumes:
       - ./dist/dockerVolume/config:/home/app/.config/github-release-writer

@@ -40,8 +40,9 @@ async function getPackageJson(context, fetchOptions) {
  */
 async function handlePush(context) {
   const {payload} = context
+  logger.debug(`Received push from ${payload.sender?.login} in ${payload.repository.full_name}`)
   if (payload.sender.id === 54471281) {
-    // That's nodejs-changelog-writer[bot]
+    logger.debug("Skipping, it's from nodejs-changelog-writer[bot]")
     return
   }
   if (payload.ref !== "refs/heads/master") {
