@@ -16,7 +16,7 @@ import {logger} from "src/core"
 async function getPackageJson(context, fetchOptions) {
   let content
   try {
-    const response = await context.github.repos.getContents({
+    const response = await context.octokit.repos.getContents({
       ...fetchOptions,
       path: "package.json",
     })
@@ -104,7 +104,7 @@ async function handlePush(context) {
   let lastTagPkg
   let isInitialRelease = false
   try {
-    const tagResponse = await context.github.repos.getCommit({
+    const tagResponse = await context.octokit.repos.getCommit({
       owner: ownerName,
       repo: repoName,
       ref: beforeTagName,
@@ -118,7 +118,7 @@ async function handlePush(context) {
     })
   } catch {}
   if (!beforeTag) {
-    const tagsList = await context.github.repos.listTags({
+    const tagsList = await context.octokit.repos.listTags({
       per_page: 1,
       owner: ownerName,
       repo: repoName,
@@ -138,7 +138,7 @@ async function handlePush(context) {
   }
   let comparison = null
   if (!isInitialRelease) {
-    const compareResult = await context.github.repos.compareCommits({
+    const compareResult = await context.octokit.repos.compareCommits({
       owner: ownerName,
       repo: repoName,
       base: beforeTag.name,
@@ -168,7 +168,7 @@ async function handlePush(context) {
     dependencyChanges: isInitialRelease ? null : compareDependencies(lastTagPkg, afterPkg),
   })
   const releaseWeight = isInitialRelease ? "Initial" : capitalize(bumpWeight)
-  await context.github.repos.createRelease({
+  await context.octokit.repos.createRelease({
     body: markdownChangelog,
     name: `[${releaseWeight}] ${projectName} ${afterVersion}`,
     owner: ownerName,

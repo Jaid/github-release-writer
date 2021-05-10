@@ -1,5 +1,5 @@
 import fsp from "@absolunet/fsp"
-import {createProbot} from "probot"
+import {Probot, Server} from "probot"
 
 import {config, logger} from "src/core"
 
@@ -21,16 +21,18 @@ const probotApp = app => {
 export default class GithubApi {
 
   async init() {
-    const cert = await fsp.readFile(config.pemFilePath, "utf8")
-    this.probot = createProbot({
-      cert,
-      secret: config.webhookSecret,
-      id: config.githubAppId,
-      port: config.webhookPort,
+    const privateKey = await fsp.readFile(config.pemFilePath, "utf8")
+    const server = new Server({
+      Probot: Probot.defaults({
+        privateKey,
+        secret: config.webhookSecret,
+        appId: config.githubAppId,
+        port: config.webhookPort,
+      }),
     })
     logger.info("GitHub app %s is listening to webhook port %s", config.githubAppId, config.webhookPort)
-    this.probot.load(probotApp)
-    this.probot.start()
+    await server.load(probotApp)
+    server.start()
   }
 
 }
