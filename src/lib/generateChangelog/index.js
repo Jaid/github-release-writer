@@ -1,4 +1,4 @@
-import camelCase from "camel-case"
+import {camelCase} from "camel-case"
 import ensureArray from "ensure-array"
 import hasContent from "has-content"
 import humanizeList from "humanize-list"
