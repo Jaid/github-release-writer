@@ -87,5 +87,6 @@
     "probot",
     "release",
     "server"
-  ]
+  ],
+  "type": "module"
 }
