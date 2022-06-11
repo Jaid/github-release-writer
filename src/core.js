@@ -1,4 +1,4 @@
-import JaidCore from "jaid-core"
+import JaidCore from "./lib/esm/jaid-core.js"
 
 import defaults from "./config.yml"
 
