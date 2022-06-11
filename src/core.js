@@ -1,6 +1,5 @@
-import JaidCore from "./lib/esm/jaid-core.js"
-
 import defaults from "./config.yml"
+import JaidCore from "./lib/esm/jaid-core.js"
 
 const core = new JaidCore({
   name: "github-release-writer",
