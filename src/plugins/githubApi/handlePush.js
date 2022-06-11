@@ -4,9 +4,9 @@ import json5 from "json5"
 import {capitalize} from "lodash"
 import semver from "semver"
 
-import generateChangelog from "lib/generateChangelog"
+import generateChangelog from "../../lib/generateChangelog/index.js"
 
-import {logger} from "src/core"
+import {logger} from "../../core.js"
 
 /**
  * @param {import("probot").Context} context

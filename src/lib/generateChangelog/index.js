@@ -4,10 +4,10 @@ import hasContent from "has-content"
 import humanizeList from "humanize-list"
 import {sortBy} from "lodash"
 
-import {logger} from "src/core"
+import {logger} from "../../core.js"
 
 import commitTypes from "./commitTypes.yml"
-import dependencyTypes from "./dependencyTypes"
+import dependencyTypes from "./dependencyTypes.js"
 import template from "./markdown.hbs"
 
 /**

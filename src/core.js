@@ -4,7 +4,7 @@ import defaults from "./config.yml"
 
 const core = new JaidCore({
   name: "github-release-writer",
-  version: _PKG_VERSION,
+  version: process.env._PKG_VERSION,
   useGot: true,
   insecurePort: 39410,
   configSetup: {

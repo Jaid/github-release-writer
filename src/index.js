@@ -1,7 +1,7 @@
 import readableMs from "readable-ms"
 import yargs from "yargs"
 
-import core from "./core"
+import core from "./core.js"
 
 /**
  * @param {*} message
@@ -37,16 +37,14 @@ async function job() {
   await core.init(plugins)
 }
 
-function main() {
-  job().catch(error => {
-    log("Core process crashed", "error")
-    log(error, "error")
-    process.exit(1)
-  })
+/**
+ * @type {import("yargs").CommandBuilder}
+ */
+const builder = {
 }
 
-yargs
-  .scriptName(_PKG_NAME)
-  .version(_PKG_VERSION)
-  .command("$0", _PKG_DESCRIPTION, main)
-  .argv
+await yargs(hideBin(process.argv))
+  .scriptName(process.env.REPLACE_PKG_NAME)
+  .version(process.env.REPLACE_PKG_VERSION)
+  .command("$0", process.env.REPLACE_PKG_DESCRIPTION, builder, job)
+  .parse()

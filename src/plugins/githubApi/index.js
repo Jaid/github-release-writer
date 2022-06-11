@@ -1,9 +1,9 @@
 import fsp from "@absolunet/fsp"
 import {Probot, Server} from "probot"
 
-import {config, logger} from "src/core"
+import {config, logger} from "../../core.js"
 
-import handlePush from "./handlePush"
+import handlePush from "./handlePush.js"
 
 /**
  * @callback ReleaseEvent
