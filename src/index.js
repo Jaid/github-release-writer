@@ -1,4 +1,4 @@
-import readableMs from "./lib/esm/readable-ms.js"
+import readableMs from "readable-ms"
 import yargs from "yargs"
 import {hideBin} from "yargs/helpers" // eslint-disable-line node/file-extension-in-import -- This is not a real file path, this is a resolve shortcut defined in node_modules/yargs/package.json[exports][./helpers]
 
