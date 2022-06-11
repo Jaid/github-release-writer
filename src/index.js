@@ -1,8 +1,8 @@
-import readableMs from "./lib/esm/readable-ms.js"
 import yargs from "yargs"
-import {hideBin} from "yargs/helpers" // eslint-disable-line node/file-extension-in-import -- This is not a real file path, this is a resolve shortcut defined in node_modules/yargs/package.json[exports][./helpers]
 
+import {hideBin} from "../node_modules/yargs/helpers/helpers.mjs" // HACK Switch to yargs' ESM resolve shortcut "yargs/helpers" some day, but not now, it's not well supported by ESLint and webpack
 import core from "./core.js"
+import readableMs from "./lib/esm/readable-ms.js"
 
 /**
  * @param {*} message
@@ -24,12 +24,19 @@ process.on("exit", code => {
  * @return {Promise<void>}
  */
 const job = async () => {
-  const plugins = {}
-  const pluginsRequire = require.context("./plugins/", true, /^\.\/\w+\/index.js$/)
-  for (const value of pluginsRequire.keys()) {
-    const {pluginName} = value.match(/[/\\](?<pluginName>.+?)[/\\]index\.js$/).groups
-    plugins[pluginName] = pluginsRequire(value).default
-  }
+  const pluginsRequire = import.meta.webpackContext("./plugins", {
+    mode: "lazy",
+    regExp: /^\.\/\w+\/index.js$/,
+  })
+  const loaders = pluginsRequire.keys().map(async value => {
+    const plugin = await pluginsRequire(value)
+    return [
+      value.match(/[/\\](.+?)[/\\]index\.js$/)[1],
+      plugin.default,
+    ]
+  })
+  const entries = await Promise.all(loaders)
+  const plugins = Object.fromEntries(entries)
   await core.init(plugins)
 }
 

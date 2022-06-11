@@ -1,10 +1,10 @@
 import compareDependencies from "compare-dependencies"
-import hasContent from "has-content"
 import json5 from "json5"
 import {capitalize} from "lodash"
 import semver from "semver"
 
 import {logger} from "../../core.js"
+import hasContent from "../../lib/esm/has-content.js"
 import generateChangelog from "../../lib/generateChangelog/index.js"
 
 /**

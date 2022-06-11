@@ -4,7 +4,6 @@ import JaidCore from "./lib/esm/jaid-core.js"
 const core = new JaidCore({
   name: "github-release-writer",
   version: process.env._PKG_VERSION,
-  useGot: true,
   insecurePort: 39_410,
   configSetup: {
     defaults,
