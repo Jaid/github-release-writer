@@ -6,7 +6,7 @@ const core = new JaidCore({
   name: "github-release-writer",
   version: process.env._PKG_VERSION,
   useGot: true,
-  insecurePort: 39410,
+  insecurePort: 39_410,
   configSetup: {
     defaults,
     secretKeys: [

@@ -4,9 +4,8 @@ import json5 from "json5"
 import {capitalize} from "lodash"
 import semver from "semver"
 
-import generateChangelog from "../../lib/generateChangelog/index.js"
-
 import {logger} from "../../core.js"
+import generateChangelog from "../../lib/generateChangelog/index.js"
 
 /**
  * @param {import("probot").Context} context
@@ -41,7 +40,7 @@ async function getPackageJson(context, fetchOptions) {
 async function handlePush(context) {
   const {payload} = context
   logger.debug(`Received push from ${payload.sender?.login} in ${payload.repository.full_name}`)
-  if (payload.sender.id === 54471281) {
+  if (payload.sender.id === 54_471_281) {
     logger.debug("Skipping, it's from nodejs-changelog-writer[bot]")
     return
   }
