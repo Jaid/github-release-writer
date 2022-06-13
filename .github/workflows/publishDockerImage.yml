@@ -15,15 +15,15 @@ jobs:
         with:
           username: jaidchen
           password: ${{ secrets.dockerHubToken }}
-      # - name: Build and push Docker images (development)
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     push: true
-      #     platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/ppc64le
-      #     tags: jaidchen/${{ github.event.repository.name }}:development
-      #     build-args: nodeEnv=development
-      #     cache-from: type=registry,ref=${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}:buildcache
-      #     cache-to: type=registry,ref=${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}:buildcache,mode=max
+      - name: Build and push Docker images (development)
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/ppc64le
+          tags: jaidchen/${{ github.event.repository.name }}:development
+          build-args: nodeEnv=development
+          cache-from: type=registry,ref=${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}:buildcache
+          cache-to: type=registry,ref=${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}:buildcache,mode=max
       - name: Build and push Docker images (production)
         uses: docker/build-push-action@v3
         with:
