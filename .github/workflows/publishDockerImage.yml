@@ -1,4 +1,4 @@
-name: Publish Node package
+name: Publish Docker image
 on:
   push:
     tags: ["v[0-9]+.[0-9]+.[0-9]+"]
@@ -8,9 +8,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - tag: ""
+          - tag: latest
             nodeEnv: production
-          - tag: :development
+          - tag: development
             nodeEnv: development
     steps:
       - name: Set up QEMU
@@ -27,7 +27,7 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/ppc64le
-          tags: jaidchen/${{ github.event.repository.name }}{{ matrix.tag }}
-          build-args: nodeEnv={{ matrix.nodeEnv }}
+          tags: jaidchen/${{ github.event.repository.name }}:${{ matrix.tag }}
+          build-args: nodeEnv=${{ matrix.nodeEnv }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
