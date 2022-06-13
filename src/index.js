@@ -1,6 +1,6 @@
 import yargs from "yargs"
 
-import {hideBin} from "../node_modules/yargs/helpers/helpers.mjs" // TODO Switch to yargs' ESM resolve shortcut "yargs/helpers" some day, but not now, it's not well supported by ESLint and webpack
+import {hideBin} from "../node_modules/yargs/helpers/helpers.mjs" // HACK Switch to yargs' ESM resolve shortcut "yargs/helpers" some day, but not now, it's not well supported by ESLint and webpack
 import core from "./core.js"
 import readableMs from "./lib/esm/readable-ms.js"
 
