@@ -1,7 +1,7 @@
 {
   "title": "GitHub Release Writer",
   "webpackConfigJaid": "cli",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "author": "Jaid <jaid.jsx@gmail.com> (https://github.com/Jaid)",
   "dependencies": {
     "@absolunet/fsp": "^1.7.0",
