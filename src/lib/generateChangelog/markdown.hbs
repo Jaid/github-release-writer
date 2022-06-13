@@ -42,15 +42,19 @@ Event|Package|Before|After
 
 ---
 {{#unless isInitialRelease}}
-- Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) a
+- Code changes: [{{beforeTag.name}} …
+{{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1)
+({{$handlebars-helper-plural comparison.total_commits 'commit'}})
 {{/unless}}
 {{#if isOnNpm}}
-- jsDelivr: [cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}/)
+- jsDelivr:
+[cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}/)
 - UNPKG: [unpkg.com/browse/{{packageName}}@{{pkg.version}}](https://unpkg.com/browse/{{packageName}}@{{pkg.version}}/)
 {{/if}}
 
 {{#unless isInitialRelease}}
-#### a
+#### {{$handlebars-helper-plural authorsCount 'author'}}
 
-{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="a from {{name}}" src="{{avatar}}"/></a> {{/each}}
+{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32
+    alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}" /></a> {{/each}}
 {{/unless}}
