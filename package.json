@@ -19,7 +19,7 @@
     "globby": "^13.1.2",
     "got": "^12.1.0",
     "handlebars": "^4.7.7",
-    "handlebars-helper-plural": "^1.0.2",
+    "handlebars-helper-plural": "^2.0.0",
     "handlebars-helpers": "^0.10.0",
     "has-content": "^1.1.1",
     "humanize-list": "^1.0.1",
