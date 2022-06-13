@@ -1,7 +1,7 @@
 import {camelCase} from "camel-case"
 import ensureArray from "ensure-array"
 import humanizeList from "humanize-list"
-import {sortBy} from "lodash"
+import {sortBy} from "lodash-es"
 
 import {logger} from "../../core.js"
 import hasContent from "../esm/has-content.js"

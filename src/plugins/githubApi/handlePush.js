@@ -1,5 +1,5 @@
 import json5 from "json5"
-import {capitalize} from "lodash"
+import {capitalize} from "lodash-es"
 import semver from "semver"
 
 import {logger} from "../../core.js"
