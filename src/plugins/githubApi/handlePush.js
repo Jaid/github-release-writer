@@ -166,14 +166,16 @@ async function handlePush(context) {
     dependencyChanges: isInitialRelease ? null : compareDependencies(lastTagPkg, afterPkg),
   })
   const releaseWeight = isInitialRelease ? "Initial" : capitalize(bumpWeight)
-  await context.octokit.repos.createRelease({
+  const releaseName = `[${releaseWeight}] ${projectName} ${afterVersion}`
+  const createReleaseResponse = await context.octokit.repos.createRelease({
     body: markdownChangelog,
-    name: `[${releaseWeight}] ${projectName} ${afterVersion}`,
+    name: releaseName,
     owner: ownerName,
     repo: repoName,
     tag_name: afterTagName,
     target_commitish: payload.after,
   })
+  logger.info(`Pushed release “${releaseName}”: `, createReleaseResponse.url)
 }
 
 /**
