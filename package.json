@@ -27,7 +27,7 @@
     "json5": "^2.2.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "oauth-1.0a": "^2.2.6",
     "pify": "^6.0.0",
     "prevent-start": "^1.0.5",
