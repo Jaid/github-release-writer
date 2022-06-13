@@ -16,7 +16,7 @@
     "ensure-array": "^1.0.0",
     "fast-koa-router": "^1.3.2",
     "flatted": "^3.2.5",
-    "globby": "^13.1.1",
+    "globby": "^13.1.2",
     "got": "^12.1.0",
     "handlebars": "^4.7.7",
     "handlebars-helper-plural": "^1.0.2",
