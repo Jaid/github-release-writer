@@ -2,7 +2,7 @@
 
 
 <a href="https://raw.githubusercontent.com/jaid/github-release-writer/master/license.txt"><img src="https://img.shields.io/github/license/jaid/github-release-writer?style=flat-square" alt="License"/></a> <a href="https://github.com/sponsors/jaid"><img src="https://img.shields.io/badge/<3-Sponsor-FF45F1?style=flat-square" alt="Sponsor github-release-writer"/></a>  
-<a href="https://actions-badge.atrox.dev/jaid/github-release-writer/goto"><img src="https://img.shields.io/endpoint.svg?style=flat-square&url=https%3A%2F%2Factions-badge.atrox.dev%2Fjaid%2Fgithub-release-writer%2Fbadge" alt="Build status"/></a> <a href="https://github.com/jaid/github-release-writer/commits"><img src="https://img.shields.io/github/commits-since/jaid/github-release-writer/v2.2.1?style=flat-square&logo=github" alt="Commits since v2.2.1"/></a> <a href="https://github.com/jaid/github-release-writer/commits"><img src="https://img.shields.io/github/last-commit/jaid/github-release-writer?style=flat-square&logo=github" alt="Last commit"/></a> <a href="https://github.com/jaid/github-release-writer/issues"><img src="https://img.shields.io/github/issues/jaid/github-release-writer?style=flat-square&logo=github" alt="Issues"/></a>  
+<a href="https://actions-badge.atrox.dev/jaid/github-release-writer/goto"><img src="https://img.shields.io/endpoint.svg?style=flat-square&url=https%3A%2F%2Factions-badge.atrox.dev%2Fjaid%2Fgithub-release-writer%2Fbadge" alt="Build status"/></a> <a href="https://github.com/jaid/github-release-writer/commits"><img src="https://img.shields.io/github/commits-since/jaid/github-release-writer/v2.2.2?style=flat-square&logo=github" alt="Commits since v2.2.2"/></a> <a href="https://github.com/jaid/github-release-writer/commits"><img src="https://img.shields.io/github/last-commit/jaid/github-release-writer?style=flat-square&logo=github" alt="Last commit"/></a> <a href="https://github.com/jaid/github-release-writer/issues"><img src="https://img.shields.io/github/issues/jaid/github-release-writer?style=flat-square&logo=github" alt="Issues"/></a>  
 <a href="https://npmjs.com/package/github-release-writer"><img src="https://img.shields.io/npm/v/github-release-writer?style=flat-square&logo=npm&label=latest%20version" alt="Latest version on npm"/></a> <a href="https://github.com/jaid/github-release-writer/network/dependents"><img src="https://img.shields.io/librariesio/dependents/npm/github-release-writer?style=flat-square&logo=npm" alt="Dependents"/></a> <a href="https://npmjs.com/package/github-release-writer"><img src="https://img.shields.io/npm/dm/github-release-writer?style=flat-square&logo=npm" alt="Downloads"/></a>
 
 **Generates and inserts changelogs into GitHub releases for Node packages.**
@@ -17,13 +17,13 @@
 <a href="https://npmjs.com/package/github-release-writer"><img src="https://img.shields.io/badge/npm-github--release--writer-C23039?style=flat-square&logo=npm" alt="github-release-writer on npm"/></a>
 
 ```bash
-npm install --global github-release-writer@^2.2.1
+npm install --global github-release-writer@^2.2.2
 ```
 
 <a href="https://yarnpkg.com/package/github-release-writer"><img src="https://img.shields.io/badge/Yarn-github--release--writer-2F8CB7?style=flat-square&logo=yarn&logoColor=white" alt="github-release-writer on Yarn"/></a>
 
 ```bash
-yarn global add github-release-writer@^2.2.1
+yarn global add github-release-writer@^2.2.2
 ```
 
 
