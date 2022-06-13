@@ -1,17 +1,10 @@
-name: Publish Docker image
+name: Push to DockerHub
 on:
   push:
     tags: ["v[0-9]+.[0-9]+.[0-9]+"]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - tag: latest
-            nodeEnv: production
-          - tag: development
-            nodeEnv: development
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -22,12 +15,21 @@ jobs:
         with:
           username: jaidchen
           password: ${{ secrets.dockerHubToken }}
-      - name: Build and push Docker images
+      - name: Build and push Docker images (development)
         uses: docker/build-push-action@v3
         with:
           push: true
           platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/ppc64le
-          tags: jaidchen/${{ github.event.repository.name }}:${{ matrix.tag }}
+          tags: jaidchen/${{ github.event.repository.name }}:development
           build-args: nodeEnv=${{ matrix.nodeEnv }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=jaid/${{ github.event.repository.name }}:buildcache
+          cache-to: type=registry,ref=user/${{ github.event.repository.name }}:buildcache,mode=max
+      - name: Build and push Docker images (production)
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/ppc64le
+          tags: jaidchen/${{ github.event.repository.name }}
+          build-args: nodeEnv=${{ matrix.nodeEnv }}
+          cache-from: type=registry,ref=jaid/${{ github.event.repository.name }}:buildcache
+          cache-to: type=registry,ref=user/${{ github.event.repository.name }}:buildcache,mode=max
