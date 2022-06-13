@@ -39,7 +39,6 @@ async function getPackageJson(context, fetchOptions) {
  */
 async function handlePush(context) {
   const {payload} = context
-  logger.debug(`Received push from ${payload.sender?.login} in ${payload.repository.full_name}`)
   if (payload.sender.id === 54_471_281) {
     logger.debug("Skipping, it's from nodejs-changelog-writer[bot]")
     return
@@ -177,4 +176,17 @@ async function handlePush(context) {
   })
 }
 
-export default handlePush
+/**
+ * @param {import("probot").Context<import("@octokit/webhooks").Webhooks.WebhookPayloadPush>} context
+ * @return {Promise<void>}
+ */
+async function tryHandlePush(context) {
+  logger.debug(`Received push from ${context.payload.sender?.login} in ${context.payload.repository.full_name}`)
+  try {
+    await handlePush(context)
+  } catch (error) {
+    logger.error("Couldn't handle push: %s", error)
+  }
+}
+
+export default tryHandlePush
