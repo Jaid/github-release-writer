@@ -1,3 +1,3 @@
-import commonJsModule from "ensure-array"
+import commonJsModule from "sure-array"
 
-export default commonJsModule.default
+export default commonJsModule

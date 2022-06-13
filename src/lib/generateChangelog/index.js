@@ -1,5 +1,5 @@
 import {camelCase} from "camel-case"
-import ensureArray from "../../lib/esm/ensure-array.js"
+import ensureArray from "../../lib/esm/sure-array.js"
 import humanizeList from "humanize-list"
 import {sortBy} from "lodash-es"
 
@@ -38,7 +38,7 @@ function sortCategories({id}) {
  */
 function getCommitTypeByPrefix(prefix) {
   for (const commitType of commitTypes) {
-    const typePrefixes = ensureArray(commitType.prefix)
+    const typePrefixes = commitType.prefix
     if (typePrefixes.includes(prefix)) {
       return commitType
     }

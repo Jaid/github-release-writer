@@ -42,7 +42,7 @@ Event|Package|Before|After
 
 ---
 {{#unless isInitialRelease}}
-- Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) ({{$handlebars-helper-plural comparison.total_commits 'commit'}})
+- Code changes: [{{beforeTag.name}} … {{afterTagName}}](https://github.com/{{ownerName}}/{{repoName}}/compare/{{beforeTag.name}}...{{afterTagName}}?diff=unified&w=1) a
 {{/unless}}
 {{#if isOnNpm}}
 - jsDelivr: [cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}](https://cdn.jsdelivr.net/npm/{{packageName}}@{{pkg.version}}/)
@@ -50,7 +50,7 @@ Event|Package|Before|After
 {{/if}}
 
 {{#unless isInitialRelease}}
-#### {{$handlebars-helper-plural authorsCount 'author'}}
+#### a
 
-{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="{{$handlebars-helper-plural commits 'commit'}} from {{name}}" src="{{avatar}}"/></a> {{/each}}
+{{#each authors}}<a href="{{url}}" target=_blank><img height=32 width=32 alt="a from {{name}}" src="{{avatar}}"/></a> {{/each}}
 {{/unless}}
