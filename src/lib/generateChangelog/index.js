@@ -1,5 +1,5 @@
 import {camelCase} from "camel-case"
-import ensureArray from "ensure-array"
+import ensureArray from "../../lib/esm/ensure-array.js"
 import humanizeList from "humanize-list"
 import {sortBy} from "lodash-es"
 
