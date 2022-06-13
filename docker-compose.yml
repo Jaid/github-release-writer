@@ -4,8 +4,6 @@ services:
     container_name: github-release-writer
     build:
       context: .
-      args:
-        nodeEnv: development
     ports:
       - 39410:39410
       - 39411:39411
