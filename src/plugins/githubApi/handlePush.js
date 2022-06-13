@@ -1,4 +1,4 @@
-import compareDependencies from "compare-dependencies"
+import compareDependencies from "../../lib/esm/compare-dependencies.js"
 import json5 from "json5"
 import {capitalize} from "lodash"
 import semver from "semver"
