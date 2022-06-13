@@ -1,10 +1,10 @@
 import {camelCase} from "camel-case"
-import ensureArray from "../../lib/esm/sure-array.js"
 import humanizeList from "humanize-list"
 import {sortBy} from "lodash-es"
 
 import {logger} from "../../core.js"
 import hasContent from "../esm/has-content.js"
+import ensureArray from "../esm/sure-array.js"
 import commitTypes from "./commitTypes.yml"
 import dependencyTypes from "./dependencyTypes.js"
 import template from "./markdown.hbs"
