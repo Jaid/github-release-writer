@@ -29,6 +29,9 @@ export default class GithubApi {
         appId: config.githubAppId,
       }),
     })
+    server.router("/github-release-writer").get("/health", (request, response) => {
+      response.send("ok")
+    })
     await server.load(probotApp)
     server.start()
     logger.info("GitHub app %s is listening to webhook port %s", config.githubAppId, config.webhookPort)
