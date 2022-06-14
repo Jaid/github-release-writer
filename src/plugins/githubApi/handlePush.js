@@ -175,7 +175,7 @@ async function handlePush(context) {
     tag_name: afterTagName,
     target_commitish: payload.after,
   })
-  logger.info(`Pushed release “${releaseName}”: `, createReleaseResponse.url)
+  logger.info("Pushed release “%s”: %s", releaseName, createReleaseResponse.url)
 }
 
 /**
