@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: 45 23 * * 0 # https://crontab.guru/#45_23_*_*_0
 env:
-  arch: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+  arch: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
   dockerFile: Dockerfile
   dockerHubUser: jaidchen
   dockerHubRegistry: docker.io
