@@ -14,7 +14,7 @@ RUN mkdir --parents .config/github-release-writer
 RUN NODE_ENV=development npm install
 RUN NODE_ENV=$nodeEnv node_modules/.bin/webpack
 WORKDIR $userHome
-RUN cp --recursive dist/package/$nodeEnv dist
+RUN cp --recursive src/dist/package/$nodeEnv dist
 RUN rm --recursive --force src
 
 VOLUME $userHome/.config/github-release-writer
