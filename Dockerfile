@@ -2,7 +2,7 @@
 FROM jaidchen/node-app:main
 
 RUN apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 update
-RUN apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 --yes --quiet install g++ make libpng-dev zlib-dev
+RUN apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 --yes --quiet install g++ make libpng-dev zlib1g-dev
 
 COPY . .
 ARG nodeEnv=production
