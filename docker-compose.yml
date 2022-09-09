@@ -8,7 +8,7 @@ services:
       - 39410:39410
       - 39411:39411
     volumes:
-      - ./dist/dockerVolume/config:/home/app/.config/github-release-writer
+      - ./dist/dockerVolume/config:/app/.config/github-release-writer
     logging:
       driver: json-file
       options:
