@@ -1,0 +1,99 @@
+name: Push Docker
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 45 23 * * 0 # https://crontab.guru/#45_23_*_*_0
+env:
+  arch: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+  dockerFile: Dockerfile
+  dockerHubUser: jaidchen
+  dockerHubRegistry: docker.io
+  githubRegistry: ghcr.io
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Set name
+        id: dockerHubRef
+        shell: bash
+        run: repoName=${{ github.event.repository.name }} && shortName=${repoName##docker-} && printf '::set-output name=ref::%s/%s\n::set-output name=shortName::%s' ${{ env.dockerHubUser }} $shortName $shortName
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up qemu
+        uses: docker/setup-qemu-action@v2
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to ${{ env.dockerHubRegistry }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ env.dockerHubUser }}
+          password: ${{ secrets.dockerHubToken }}
+      - name: Login to ${{ env.githubRegistry }}
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.githubRegistry }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract Docker metadata (development)
+        id: metaDevelopment
+        uses: docker/metadata-action@v4.0.1
+        with:
+          images: |
+            ${{ env.githubRegistry }}/${{ github.repository }}
+            ${{ steps.dockerHubRef.outputs.ref }}
+          labels: |
+            maintainer=${{ github.actor }}
+            org.opencontainers.image.vendor=${{ github.actor }}
+            org.opencontainers.image.title=${{ steps.dockerHubRef.outputs.shortName }}
+          tags: |
+            type=ref,event=branch,suffix=-development
+            type=edge,branch=$repo.default_branch,suffix=-development
+            type=schedule,pattern=nightly,suffix=-development
+            type=schedule,pattern={{date 'YYYYMMDD'}},suffix=-development
+            type=sha,format=long,suffix=-development
+            type=raw,value=edge,suffix=-development
+      - name: Extract Docker metadata (production)
+        id: metaProduction
+        uses: docker/metadata-action@v4.0.1
+        with:
+          images: |
+            ${{ env.githubRegistry }}/${{ github.repository }}
+            ${{ steps.dockerHubRef.outputs.ref }}
+          labels: |
+            maintainer=${{ github.actor }}
+            org.opencontainers.image.vendor=${{ github.actor }}
+            org.opencontainers.image.title=${{ steps.dockerHubRef.outputs.shortName }}
+          tags: |
+            type=ref,event=branch
+            type=edge,branch=$repo.default_branch
+            type=schedule,pattern=nightly
+            type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=sha,format=long
+            type=raw,value=edge
+      - name: Build and push (development)
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          build-args: nodeEnv=development
+          file: ${{ env.dockerFile }}
+          platforms: ${{ env.arch }}
+          tags: ${{ steps.metaDevelopment.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ steps.dockerHubRef.outputs.ref }}:buildcache
+          cache-to: type=registry,ref=${{ steps.dockerHubRef.outputs.ref }}:buildcache,mode=max
+      - name: Build and push (production)
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          build-args: nodeEnv=production
+          file: ${{ env.dockerFile }}
+          platforms: ${{ env.arch }}
+          tags: ${{ steps.metaProduction.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ steps.dockerHubRef.outputs.ref }}:buildcache
+          cache-to: type=registry,ref=${{ steps.dockerHubRef.outputs.ref }}:buildcache,mode=max
