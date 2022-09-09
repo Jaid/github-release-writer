@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM jaidchen/node-app:main
 
-RUN apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 --yes --quiet autoremove g++ make libpng-dev zlib-dev
+RUN apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 --yes --quiet install g++ make libpng-dev zlib-dev
 
 COPY . .
 ARG nodeEnv=production
