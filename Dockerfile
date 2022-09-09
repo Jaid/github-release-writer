@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM jaidchen/node-app
+FROM jaidchen/node-app:main
 COPY . .
 RUN chown --recursive $userName .
 USER $userName
